@@ -68,6 +68,3 @@ outvol = volumeFromDescription(args.outfile, dimnames, sizes, starts, steps)
 outvol.data = np.ravel(data).reshape(sizes)
 outvol.writeFile()
 outvol.closeVolume()
-# Open file
-
-# Swap axis if time

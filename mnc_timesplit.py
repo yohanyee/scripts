@@ -2,10 +2,7 @@
 
 # Load libraries
 import argparse
-import os
-import sys
 try:
-    import nibabel as nib
     import numpy as np
     from pyminc.volumes.factory import *
 except ImportError, e:
@@ -13,9 +10,10 @@ except ImportError, e:
     print(e)
     sys.exit(1)
 
+
 # Parse arguments
-parser = argparse.ArgumentParser(description="Convert MINC .mnc files to NIfTI .nii format")
-parser.add_argument('file', help="Input mnc file")
+parser = argparse.ArgumentParser(description="Split MINC .mnc timeseries into separate volumes")
+parser.add_argument('file', help="Input mnc timeseries")
 parser.add_argument('-o', '--outfile', help="Output nii file")
 parser.add_argument('-t', '--time_axis', default=4, type=int, help="Dimension along which temporal variation is captured (default 4)")
 args = parser.parse_args()
@@ -42,16 +40,3 @@ try:
 except AssertionError:
     print("Image must have between 1 to 4 dimensions (inclusive)")
     sys.exit(1)
-
-dimnames = img.dimnames
-steps = img.separations
-starts = [all_starts[i] for i in range(len(dims))]
-sizes = dims
-
-affine = np.diag([1, 2, 3, 1])
-header = nib.Nifti1Header()
-header['pixdim'][range(1,len(dims)+1)] = steps
-
-out_img = nib.Nifti1Image(data, affine=affine, header=header)
-
-nib.save(out_img, args.outfile)
