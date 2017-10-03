@@ -4,14 +4,10 @@
 import argparse
 import os
 import sys
-try:
-    import nibabel as nib
-    import numpy as np
-    from pyminc.volumes.factory import *
-except ImportError, e:
-    print("Error: one or more python library could not be imported. See error below.")
-    print(e)
-    sys.exit(1)
+import nibabel as nib
+import numpy as np
+from pyminc.volumes.factory import *
+
 
 # Parse arguments
 parser = argparse.ArgumentParser(description="Convert MINC .mnc files to NIfTI .nii format")
