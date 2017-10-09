@@ -4,7 +4,7 @@
 import argparse
 import os
 import sys
-import nibabel as nib
+from import nibabel as nib
 import numpy as np
 from pyminc.volumes.factory import *
 
