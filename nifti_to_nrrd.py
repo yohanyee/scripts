@@ -34,8 +34,6 @@ time_units = [NIFTI_unit_definitions[time_code]]
 space_units = [NIFTI_unit_definitions[space_code] for i in range(3)] 
 units = space_units + time_units if dim==4 else space_units
 
-
-
 # Get sform matrix
 # If sform_code is not set (=0), build from pixdims, otherwise set from header
 if dat.header['sform_code']==0:
